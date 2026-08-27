@@ -12,6 +12,7 @@ I run these daily against live systems. This repo is a clean, dependency-light e
 | `patterns/` | The reusable parts: tool-schema design, structured-error contracts, long-operation handling, and idempotency |
 | `client/` | A minimal MCP client for exercising a server without a full agent host |
 | `docs/` | Wiring notes, and the failure modes worth knowing about up front |
+| `test/` | Unit tests for the pattern modules (`npm test`) |
 
 ## Why MCP
 
@@ -35,9 +36,15 @@ The interesting engineering isn't the protocol, which is small. It's everything 
 
 ```bash
 npm install
-npm run server:sqlite          # starts the SQLite MCP server on stdio
-npm run client -- list-tools   # exercise it without an agent host
+npm run seed                                        # build the synthetic fixture db
+npm run client -- list-tools servers/sqlite.js      # read the tools as a model receives them
+npm run client -- call servers/sqlite.js describe_schema
+npm run client -- call servers/sqlite.js run_query '{"sql":"SELECT * FROM projects"}'
+npm test
 ```
+
+Each server also runs standalone on stdio for a host to launch:
+`npm run server:sqlite` · `npm run server:files` · `npm run server:fetch`
 
 Register with any MCP-capable host by pointing it at the server command. `docs/wiring.md` has configs for the two hosts I've used.
 

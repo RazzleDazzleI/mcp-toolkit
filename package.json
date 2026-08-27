@@ -1,0 +1,23 @@
+{
+  "name": "mcp-toolkit",
+  "version": "0.1.0",
+  "description": "Production Model Context Protocol servers and agent workflow patterns",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "server:files": "node servers/filesystem.js",
+    "server:fetch": "node servers/fetch.js",
+    "server:sqlite": "node servers/sqlite.js",
+    "seed": "node fixtures/seed.js",
+    "client": "node client/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "better-sqlite3": "^11.0.0",
+    "zod": "^3.23.0"
+  }
+}
