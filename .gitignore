@@ -1,0 +1,30 @@
+# secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*
+*service-account*
+*access-token*
+secrets/
+
+# deps / build
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+
+# local data
+*.sqlite
+*.db
+data/
+fixtures/local/
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
